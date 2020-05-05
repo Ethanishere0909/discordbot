@@ -1,0 +1,59 @@
+﻿const Discord = require("discord.js");
+const { RichEmbed } = require('discord.js');
+
+
+const TOKEN = "NzA3MjQ0ODEzMjM3MzU0NDk3.XrF_Fw.PDiPgsTeIV8NZbFvqIOA98-0x1I";
+const PREFIX = ".";
+const client = new Discord.Client();
+
+
+var fortunes = [
+    "Yes",
+    "No",
+    "Maybe",
+];
+
+function pluck(array){
+    return array.map(function(item) { return item['name']; })
+}
+
+
+bot.on("ready", () => {
+    console.log("Ready");  
+    bot.user.setGame("lol");
+});
+
+bot.on("message", message => {
+    if (message.author.bot) return;
+    if (!message.content.startsWith(PREFIX)) return;
+    var args = message.content.substring(PREFIX.length).split(" ");
+    var username2 = args[0]
+
+switch (args[0].toLowerCase()) {
+
+
+    case "help":
+    var embed = new Discord.RichEmbed()
+    .setColor("RANDOM")
+    .addField("<<< Command List >>>", "Use .help <command name> for details", true)
+    .addField(".help", "Displays all the available commands for your permission levels", true)
+    .setFooter("Ranking Bot")
+    message.channel.sendEmbed(embed);
+    break;
+    case "botinfo":
+    var embed = new Discord.RichEmbed()
+    .setColor("#FF9900")
+    .setAuthor(message.author.tag, message.author.avatarURL)
+    .addField("Name", "bot")
+    .addField("User's Serving", bot.users.size, true)
+    .addField("Channels", bot .channels.size, true)
+    .addField("Commands", ".help", true)
+    .addField("Scripting Language", "JavaScript", true)
+    .addField("Current Version", "1.7.1", true)
+    .setThumbnail(bot.user.avatarURL)
+    message.channel.sendEmbed(embed);
+    break;
+    }
+});
+
+bot.login(TOKEN);
